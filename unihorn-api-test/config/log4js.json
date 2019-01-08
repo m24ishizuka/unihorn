@@ -1,0 +1,17 @@
+{
+  "appenders": {
+    "stdout": {
+      "type": "stdout"
+    },
+    "file": {
+      "type": "file",
+      "filename": "./logs/test.log"
+    }
+  },
+  "categories": {
+    "default": {
+      "appenders": [ "stdout", "file" ],
+      "level": "info"
+    }
+  }
+}

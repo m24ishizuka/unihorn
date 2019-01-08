@@ -1,0 +1,12 @@
+GET     /users        全ユーザー情報の取得
+POST    /users        ユーザーの作成
+PUT     /users/{id}   ユーザーの更新
+DELETE  /users/{id}   ユーザーの削除
+
+GET     /threads      全スレッド情報の取得
+POST    /threads      スレッドの作成
+DELETE  /threads      スレッドの削除
+
+GET     /threads/{id} スレッド情報の取得
+POST    /threads/{id} 意見の作成
+
