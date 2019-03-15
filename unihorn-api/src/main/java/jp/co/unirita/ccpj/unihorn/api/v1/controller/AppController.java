@@ -10,8 +10,8 @@ import jp.co.unirita.ccpj.unihorn.api.v1.service.AppService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RestController
-@RequestMapping(value = "/api/v1/app")
+//@RestController
+//@RequestMapping(value = "/api/v1/app")
 public class AppController {
 
   @Autowired

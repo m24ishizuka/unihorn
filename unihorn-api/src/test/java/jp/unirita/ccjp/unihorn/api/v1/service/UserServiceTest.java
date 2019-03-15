@@ -3,6 +3,9 @@ package jp.unirita.ccjp.unihorn.api.v1.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import jp.co.unirita.ccpj.unihorn.api.UnihornApplication;
 import jp.co.unirita.ccpj.unihorn.api.v1.entity.User;
+import jp.co.unirita.ccpj.unihorn.api.v1.repository.UserRepository;
 import jp.co.unirita.ccpj.unihorn.api.v1.service.UserService;
 //import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +26,53 @@ public class UserServiceTest {
 
   @Autowired
   private UserService userService;
+  
+  @Autowired
+  private UserRepository userRepository;
+  
+  @BeforeEach
+  void setup() {
+    userRepository.deleteAll();
+  }
+  
+  @Test
+  @DisplayName("")
+  void testCount() {
+    assertEquals(new Long(0), userService.count());
+    
+    userRepository.save(new User("s", "s", "s", "s"));
+    assertEquals(new Long(1), userService.count());
+  }
+  
+  @Test
+  @DisplayName("")
+  void testGetMany() {
+    userRepository.save(new User("08", "s", "s", "s"));
+    userRepository.save(new User("01", "s", "s", "s"));
+    userRepository.save(new User("06", "s", "s", "s"));
+    userRepository.save(new User("05", "s", "s", "s"));
+    userRepository.save(new User("02", "s", "s", "s"));
+    userRepository.save(new User("03", "s", "s", "s"));
+    userRepository.save(new User("04", "s", "s", "s"));
+    userRepository.save(new User("10", "s", "s", "s"));
+    userRepository.save(new User("07", "s", "s", "s"));
+    userRepository.save(new User("09", "s", "s", "s"));
+    
+    
+    List<User> userList = userService.getMany(0, 2);
+    assertEquals("01", userList.get(0).getId());
+    assertEquals(2, userList.size());
+    
+    List<User> userList2 = userService.getMany(1, 2);
+    assertEquals("03", userList2.get(0).getId());
+    assertEquals(2, userList2.size());
+    
+    List<User> userList3 = userService.getMany(1, 5);
+    assertEquals("06", userList3.get(0).getId());
+    assertEquals(5, userList3.size());
+    
+    assertEquals(0, userService.getMany(10, 2).size());
+  }
 
   @Test
   @DisplayName("ユーザー情報自体がNULL")

@@ -6,7 +6,7 @@ import jp.co.unirita.ccpj.unihorn.api.v1.entity.User;
 
 public interface ProviderUtility {
   
-  public String getId(OAuth2User principal);
+  public String getId(OAuth2User principal) throws Exception;
   
   public User merge(User user, OAuth2User principal);
 

@@ -11,7 +11,10 @@ import jp.co.unirita.ccpj.unihorn.api.v1.entity.User;
 public class GoogleProviderUtility implements ProviderUtility {
   
   @Override
-  public String getId(OAuth2User principal) {
+  public String getId(OAuth2User principal) throws Exception {
+    if (principal == null) {
+      throw new Exception("認可情報が有りません。");
+    }
     String id = (String) principal.getAttributes().get("email");
     return id;
   }
